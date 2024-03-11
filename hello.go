@@ -9,6 +9,7 @@ import "net/http"
 import "io/ioutil"
 // import "strconv"
 import "encoding/json"
+import "github.com/redis/go-redis/v9"
 
 
 func main() {
@@ -47,46 +48,13 @@ func main() {
 	// print dictionary
 	fmt.Println(temperatureByStartTime)
 
-	// fmt.Println(forecast)
+	// REDIS PART
 
-	// // Create Request
-	// url := "https://api.weather.gov"
-	// req, err := http.NewRequest("GET", url, nil)
-	// if err != nil {
-	// 	fmt.Println("ERROR:", err.Error())
-	// 	return
-	// }
-	// fmt.Println("REQUEST", req)
-	
-	// // Authentication
-	// // User-Agent: (myweatherapp.com, contact@myweatherapp.com)
-	// req.Header.Set("User-Agent", "alexcheung880@gmail.com")
-
-	// // Send request
-	// // client := &http.Client{}
-	// resp, err := http.DefaultClient.Do(req)
-	// if err != nil {
-	// 	fmt.Println("ERROR:", err.Error())
-	// 	return 
-	// }
-	// fmt.Println("RESPONSE:", resp)
-
-	// // Apparently we need to close the response body
-	// defer resp.Body.Close()
-
-	// // Parse Response
-	// body, err := ioutil.ReadAll(resp.Body)
-	// if err != nil {
-	// 	fmt.Println("ERROR:", err.Error())
-	// 	return 
-	// }
-	// fmt.Println("BODY:", body)
-
-	// done with program
 	return
 
 }
 
+// struct for forecast response, there are more parameters not included 
 type GridForecastResponse struct {
 	Properties struct {
 		Periods []struct {
@@ -146,9 +114,42 @@ func get_grid_forecast(latitude float64, longitude float64) (*GridForecastRespon
 		fmt.Println("ERROR:", err.Error())
 		return nil
 	}
-
 	// fmt.Println("Grid object", gridForecast)
 
 	return &gridForecast
 
 }
+
+	// BASIC API REQUESTS 
+	// // Create Request
+	// url := "https://api.weather.gov"
+	// req, err := http.NewRequest("GET", url, nil)
+	// if err != nil {
+	// 	fmt.Println("ERROR:", err.Error())
+	// 	return
+	// }
+	// fmt.Println("REQUEST", req)
+	
+	// // Authentication
+	// // User-Agent: (myweatherapp.com, contact@myweatherapp.com)
+	// req.Header.Set("User-Agent", "alexcheung880@gmail.com")
+
+	// // Send request
+	// // client := &http.Client{}
+	// resp, err := http.DefaultClient.Do(req)
+	// if err != nil {
+	// 	fmt.Println("ERROR:", err.Error())
+	// 	return 
+	// }
+	// fmt.Println("RESPONSE:", resp)
+
+	// // Apparently we need to close the response body
+	// defer resp.Body.Close()
+
+	// // Parse Response
+	// body, err := ioutil.ReadAll(resp.Body)
+	// if err != nil {
+	// 	fmt.Println("ERROR:", err.Error())
+	// 	return 
+	// }
+	// fmt.Println("BODY:", body)
