@@ -27,10 +27,11 @@ func main() {
 	// fmt.Println()
 
 	// Cloudflare SF, wfo Forecast office ID: MTR San Francisco Bay Area, CA (Monterey)
-	latitude := 37.780231
-	longitude := -122.390472
+	// latitude := 37.780231
+	// longitude := -122.390472
 
-	forecast := get_grid_forecast(latitude, longitude)
+	// forecast := get_grid_forecast(latitude, longitude)
+	forecast := get_grid_forecast()
 	// fmt.Println(forecast)
 	if forecast == nil {
 		fmt.Println("ERROR: Failed to retrieve forecast")
@@ -89,7 +90,8 @@ type GridForecastResponse struct {
 
 
 // returns gridpoints X, Y used to get forecasts 
-func get_grid_forecast(latitude float64, longitude float64) (*GridForecastResponse) {
+// func get_grid_forecast(latitude float64, longitude float64) (*GridForecastResponse) {
+func get_grid_forecast() (*GridForecastResponse) {
 	// https://stackoverflow.com/questions/53312828/how-to-convert-float-to-string
 	// lat_long := strconv.FormatFloat(latitude, 'f', -1, 64) + "," + strconv.FormatFloat(longitude, 'f', -1, 64)
 
