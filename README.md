@@ -3,7 +3,7 @@ Attempt to call the National Weather Service API in Go and storign data in a Red
 
 ### to use
 Make sure you have go, redis, docker  
-In terminal: go build hello.go 
-This should create an executable called hello 
+In terminal: go build hello.go  
+This should create an executable called hello  
 Make sure docker is running  
-In terminal: ./hello 
+In terminal: ./hello  
