@@ -9,6 +9,8 @@ import "net/http"
 import "io/ioutil"
 // import "strconv"
 import "encoding/json"
+
+import "context"
 import "github.com/redis/go-redis/v9"
 
 
@@ -46,9 +48,26 @@ func main() {
 	}
 
 	// print dictionary
-	fmt.Println(temperatureByStartTime)
+	// fmt.Println(temperatureByStartTime)
 
-	// REDIS PART
+	// REDIS 
+	client := redis.NewClient(&redis.Options{
+		Addr: "localhost:6379",
+		Password: "", 
+		DB: 0,
+	})
+
+	// From redis docs
+	ctx := context.Background()
+	for k, v := range temperatureByStartTime {
+		err := client.HSet(ctx, "user-session:123", k, v).Err()
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	userSession := client.HGetAll(ctx, "user-session:123").Val()
+	fmt.Println("Printing redis user-session 123:", userSession)
 
 	return
 
